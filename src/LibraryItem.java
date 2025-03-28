@@ -44,12 +44,15 @@ public class LibraryItem {
     }
 
     public void printInfo() {
+        System.out.println(" ");
+        System.out.println("*******************************");
         System.out.println("Title: " + this.title);
         System.out.println("ItemId: " + this.itemId);
         if (this.isBorrowed == true) {
-            System.out.println("Situation: Available to borrow" );
-        } else {
             System.out.println("Situation: Borrowed to be returned");
+        } else {
+            System.out.println("Situation: Available to borrow" );
         }
+        System.out.println("*******************************");
     }
 }

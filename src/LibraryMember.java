@@ -48,4 +48,14 @@ public class LibraryMember {
         }
         this.name = name;
     }
+    public void printInfo() {
+        System.out.println(" ");
+        System.out.println("*******************************");
+        System.out.println("Member ID: " + memberId);
+        System.out.println("Member Name: " + name);
+        System.out.println("Member Borrowed Count: " + borrowedCount);
+        System.out.println("Member Borrowed Limit: " + borrowLimit);
+        System.out.println("*******************************");
+        System.out.println(" ");
+    }
 }

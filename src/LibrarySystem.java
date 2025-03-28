@@ -52,33 +52,30 @@ public class LibrarySystem {
     }
 
 
-    public void borrowItem(LibraryMember member , LibraryItem item) throws UserNotFoundException, ItemNotFoundException {
-        if(!members.contains(member)) {
-            throw new UserNotFoundException("User not found");
-        }
-        if (!items.contains(item)) {
-            throw new ItemNotFoundException("Item not found");
-        }
-        if (member.getBorrowLimit()>=5){
-            throw new OverLimitException("Over limit cant borrow more than 5 items");
-        }
-        if (item.getIsBorrowed()==true){
-            System.out.println("Item is not available");
-        }
-        item.markBorrowed();
-        member.setBorrowedCount(member.getBorrowedCount()+1);
+    public void borrowItem(int memberId , String itemId) throws UserNotFoundException, ItemNotFoundException {
+     if (findMemberById(memberId) == null) {
+         throw new UserNotFoundException("User not found");
+     }
+     if (findItemById(itemId) == null) {
+           throw new ItemNotFoundException("Item not found");
+       }
+       if(findMemberById(memberId).getBorrowedCount()>=findMemberById(memberId).getBorrowLimit()) {
+           throw new OverLimitException("Over limit... Cant't borrow this item");
+       }
+        findMemberById(memberId).setBorrowedCount(findMemberById(memberId).getBorrowedCount()+1);
+        findItemById(itemId).markBorrowed();
     }
 
 
-    public void returnItem(LibraryMember member, LibraryItem item) throws UserNotFoundException, ItemNotFoundException {
-        if(!members.contains(member)) {
+    public void returnItem(int memberId, String itemId) throws UserNotFoundException, ItemNotFoundException {
+        if (findMemberById(memberId) == null) {
             throw new UserNotFoundException("User not found");
         }
-        if (!items.contains(item)) {
+        if (findItemById(itemId) == null) {
             throw new ItemNotFoundException("Item not found");
         }
-        item.markReturned();
-        member.setBorrowedCount(member.getBorrowedCount()-1);
+        findMemberById(memberId).setBorrowedCount(findMemberById(memberId).getBorrowedCount()-1);
+        findItemById(itemId).markReturned();
     }
     public void printAllMembers() {
         for (LibraryMember i : members) {
